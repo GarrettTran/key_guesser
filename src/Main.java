@@ -4,6 +4,7 @@ import revisions.SecretKeyGuesser1;
 import revisions.SecretKeyGuesser2;
 import revisions.SecretKeyGuesser3;
 import revisions.SecretKeyGuesser3For;
+import revisions.SecretKeyGuesser4;
 
 /**
  * Main
@@ -79,11 +80,26 @@ public class Main {
         System.out.printf("[3F] Result: %s, Count: %d, Duration: %.2fμs\n", result, key.getCounter(), duration);
     }
 
+    static void revisionFour() {
+        SecretKey key = new SecretKey();
+
+        SecretKeyGuesser4 guesser = new SecretKeyGuesser4();
+
+        long startTime = System.nanoTime();
+        String result = guesser.start(key);
+        long endTime = System.nanoTime();
+
+        float duration = (float) (endTime - startTime) / 1000;
+
+        System.out.printf("[4] Result: %s, Count: %d, Duration: %.2fμs\n", result, key.getCounter(), duration);
+    }
+
     public static void main(String[] args) {
         baseline();
-        revisionOne();
-        revisionTwo();
+        // revisionOne();
+        // revisionTwo();
         revisionThree();
-        revisionThreeFor();
+        // revisionThreeFor();
+        revisionFour();
     }
 }
